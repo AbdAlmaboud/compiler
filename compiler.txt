@@ -1,0 +1,36 @@
+Keyword 	"abstract"|"continue"|"for"|"new"|"switch"|"assert"|"default"|"if"|"package"|"synchronized"|"boolean"|"do"|"goto"|"private"|"this"|"break"|"double"|"implements"|"protected"|"throw"|"byte"|"else"|"import"|"public"|"throws"|"case"|"enum"|"instanceof"|"return"|"transient"|"catch"|"extends"|"int"|"short"|"try"|"char"|"final"|"interface"|"static"|"void"|"class"|"finally"|"long"|"strictfp"|"volatile"|"const"|"float"|"native"|"super"|"while"
+White_Space      "\t"|"\f"|"\n"|"\r"|"\r\n"
+Single_line_Comment ["//".*]
+Multi_line_Comment  ["/*".(.|\n)*."*/"]
+letter		[A-Za-z]
+digit		[0-9]
+bool		"true"|"false"
+Separator	"("|")"|"{"|"}"|"["|"]"|";"|","|"."|"..."|"@"|"::"
+Operator	"="|">"|"<"|"!"|"~"|"?"|":"|"->"|"=="|">="|"<="|"!="|"&&"|"||"|"++"|"--"|"+"|"-"|"*"|"/"|"&"|"|"|"^"|"%"|"<<"|">>"|"+="|"-="|"*="|"/="|"&="|"|="|"^="|"%="
+Num1		[-+]?{digit}+\.?([eE][-+]?{digit}+)? 
+Num2		[-+]?{digit}*\.{digit}+([eE][-+]?{digit}+)? 
+%%
+{Keyword}					{printf("<Keyword,%s>\n",yytext);}
+{bool}						{printf("<bool,%s>\n",yytext);}
+({digit})*					{printf("<int,%s>\n",yytext);}
+({digit})*."."					{printf("<int,%s>\n",yytext);}
+{letter}({letter}|{digit})*			{printf("<Identifier,%s>\n",yytext);}
+{Separator}					{printf("<Separator,%s>\n",yytext);}
+{Operator}					{printf("<Operator , %s>\n",yytext);}   
+.
+%%
+
+int yywrap()
+{
+return 1;
+}
+int main()
+{	printf("Please Enter your code \n");
+	yylex();
+	return 0;
+}
+
+
+
+
+
